@@ -7,7 +7,7 @@ Scans your repository with the NeonQuery client and uploads the results to the N
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: neonquery/scan-action@v1
+  - uses: elementofcode/nq-scan-action@v1
     with:
       client_id: ${{ secrets.NEONQUERY_CLIENT_ID }}
       client_secret: ${{ secrets.NEONQUERY_CLIENT_SECRET }}
