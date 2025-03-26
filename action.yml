@@ -1,0 +1,35 @@
+name: "NeonQuery Scan"
+description: "Configures the NeonQuery client and runs a scan"
+author: Vincent Barth <vincent.barth@elementofcode.com>
+branding:
+  icon: "loader"
+  color: "purple"
+
+inputs:
+  config:
+    description: "Path to the NeonQuery configuration file"
+    default: "./nq.toml"
+  project:
+    description: "The project to scan"
+    required: true
+  client_id:
+    description: "NeonQuery API client id"
+    required: true
+  client_secret:
+    description: "NeonQuery API clien secret"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Download NeonQuery client
+      shell: bash
+      run: ./download.sh
+    - name: Run NeonQuery sclient
+      shell: bash
+      env:
+        NQ_CONFIG: ${{ inputs.config }}
+        NQ_PROJECT: ${{ inputs.project }}
+        NQ_CLIENT_ID: ${{ inputs.client_id }}
+        NQ_CLIENT_SECRET: ${{ inputs.client_secret }}
+      run: $HOME/nq-binaries/nq
